@@ -9,7 +9,7 @@ const Fund = () => {
   const [value, setValue] = useState("");
 
   const fund = () => {
-    const url = process.env.REACT_APP_DEVNET_URL;
+    const url = "https://api.devnet.solana.com";
     const connection = new Connection(url);
   
     const address = new PublicKey(value);
