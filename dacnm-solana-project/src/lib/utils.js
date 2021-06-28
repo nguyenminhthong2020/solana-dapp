@@ -1,15 +1,17 @@
+const REACT_APP_USE_DATAHUB = true;
+
 // Datahub Node's RPC URL
 export const getNodeRpcURL = () => {
-  return process.env.REACT_APP_USE_DATAHUB === "true"
-    ? `https://${process.env.REACT_APP_DATAHUB_DEVNET_RPC_URL}/apikey/${process.env.REACT_APP_DATAHUB_API_KEY}`
-    : process.env.REACT_APP_DEVNET_URL;
+  return REACT_APP_USE_DATAHUB === "true"
+    ? `https://solana--devnet--rpc.datahub.figment.io/apikey/4c747507f6c0f3b42de97b5e26bab46a/health/apikey/4c747507f6c0f3b42de97b5e26bab46a`
+    : `https://api.devnet.solana.com`;
 }
 
 // Datahub Node's WS (Web Socket) URL
 export const getNodeWsURL = () => {
-  return process.env.REACT_APP_USE_DATAHUB === "true"
-    ? `wss://${process.env.REACT_APP_DATAHUB_DEVNET_WS_URL}/apikey/${process.env.REACT_APP_DATAHUB_API_KEY}`
-    : process.env.REACT_APP_DEVNET_URL;
+  return REACT_APP_USE_DATAHUB === "true"
+    ? `wss://solana--devnet--ws.datahub.figment.io/apikey/4c747507f6c0f3b42de97b5e26bab46a/health/apikey/4c747507f6c0f3b42de97b5e26bab46a`
+    : `https://api.devnet.solana.com`;
 }
 
 // Helper for generating an account URL on Solana Explorer
