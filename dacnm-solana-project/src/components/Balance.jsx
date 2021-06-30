@@ -18,9 +18,13 @@ const Balance = () => {
     const publicKey = new PublicKey(value);
 
     connection.getBalance(publicKey)
+    // Success
+    // setBalance = balance/DECIMAL_OFFSET
     .then((balance) => {
       setBalance(balance / DECIMAL_OFFSET);
     })
+    // Err
+    // setBalance = null
     .catch((error) => {
       console.log(error);
       setBalance(null);
@@ -37,6 +41,7 @@ const Balance = () => {
           <Input placeholder="Enter an address" onChange={(e) => setValue(e.target.value) } style={{ width: "500px" }} />
           <Button type="primary" onClick={getBalance}>Check Balance</Button>
         </Space>
+        {/* Display balance if has balance */}
         {balance &&
           <Alert
             message={
