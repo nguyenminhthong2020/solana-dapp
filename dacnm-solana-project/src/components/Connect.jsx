@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { getNodeRpcURL } from "../lib/utils";
 import { Alert, Col, Space, Typography } from "antd";
 import { Connection } from "@solana/web3.js";
@@ -28,7 +29,7 @@ const Connect = () => {
   }
 
   return (
-    <Col style={{ width: "100%" }}>
+    <ConnectWrapper>
       {version
         ? <Alert
         message={
@@ -40,8 +41,15 @@ const Connect = () => {
         type="success"
         showIcon
       /> : <Alert message="Not connected to Solana" type="error" showIcon />}
-    </Col>
+    </ConnectWrapper>
   );
 }
+
+const ConnectWrapper = styled(Col)`
+  width: 40%;
+  margin: auto;
+`;
+
+
 
 export default Connect
