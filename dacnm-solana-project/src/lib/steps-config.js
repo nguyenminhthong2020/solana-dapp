@@ -24,14 +24,14 @@ export const STEPS = [
     title: "Transfer SOL tokens between accounts",
     url: "https://learn.figment.io/network-documentation/solana/solana-pathway/transfer"
   },
-  {
-    id: "deploy",
-    title: "Deploy a Program",
-    url: "https://learn.figment.io/network-documentation/solana/solana-pathway/deploy"
-  },
-  {
-    id: "call",
-    title: "Call a Program",
-    url: "https://learn.figment.io/network-documentation/solana/solana-pathway/call"
-  },
+  // {
+  //   id: "deploy",
+  //   title: "Deploy a Program",
+  //   url: "https://learn.figment.io/network-documentation/solana/solana-pathway/deploy"
+  // },
+  // {
+  //   id: "call",
+  //   title: "Call a Program",
+  //   url: "https://learn.figment.io/network-documentation/solana/solana-pathway/call"
+  // },
 ];

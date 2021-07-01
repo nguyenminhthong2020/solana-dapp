@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Connection, PublicKey, SystemProgram, Transaction, Keypair, sendAndConfirmTransaction } from "@solana/web3.js";
+import styled from 'styled-components';
 import { Form, Input, Button, Alert, Space, Typography } from 'antd';
 import { LoadingOutlined, RedoOutlined } from '@ant-design/icons';
 
@@ -74,7 +75,7 @@ const Transfer = ({ keypair }) => {
   const explorerUrl = getTxExplorerURL(txSignature);
 
   return (
-    <Form
+    <Wrapper
       {...layout}
       name="transfer"
       layout="horizontal"
@@ -83,8 +84,8 @@ const Transfer = ({ keypair }) => {
         from: keypair.publicKey.toString()
       }}
     > 
-      <Form.Item label="Sender" name="from" required>
-        <Text code>{keypair.publicKey.toString()}</Text>
+      <Form.Item label="Sender" name="from" required style={{ color: 'white'}}>
+        <KeyPairText code>{keypair.publicKey.toString()}</KeyPairText>
       </Form.Item>
 
       <Form.Item label="Amount" name="amount" required tooltip="1 lamport = 0.000000001 SOL">
@@ -95,7 +96,7 @@ const Transfer = ({ keypair }) => {
 
       <Form.Item label="Recipient" required>
         <Space direction="horizontal">
-          {toAddress && <Text code>{toAddress}</Text>}
+          {toAddress && <KeyPairText code>{toAddress}</KeyPairText>}
           <Button size="small" type="dashed" onClick={generate} icon={<RedoOutlined />}>Generate an address</Button>
         </Space>
       </Form.Item>
@@ -110,8 +111,8 @@ const Transfer = ({ keypair }) => {
         fetching &&
           <Form.Item {...tailLayout}>
             <Space size="large">
-              <LoadingOutlined style={{ fontSize: 24, color: "#1890ff" }} spin />
-              <Text type="secondary">Transfer initiated. Waiting for confirmations...</Text>
+              <LoadingOutlined style={{ fontSize: 24, color: "white" }} spin />
+              <KeyPairText>Transfer initiated. Waiting for confirmations...</KeyPairText>
             </Space>
           </Form.Item>
       }
@@ -142,16 +143,28 @@ const Transfer = ({ keypair }) => {
           />
         </Form.Item>
       }
-    </Form>
+    </Wrapper>
   );
 };
 
+const Wrapper = styled(Form)`
+  width: 50%;
+  margin: auto;
+  .ant-form-item-required {
+    color: white;
+    font-style: bold;
+    font-size: 16px;
+  }
+
+  .ant-form-item-label > label .ant-form-item-tooltip {
+    color: white;
+  }
+`;
+
+const KeyPairText = styled(Text)`
+  color: white;
+  font-size: 16px;
+  font-style: bold;
+`;
+
 export default Transfer
-
-
-// CLI https://docs.solana.com/cli/transfer-tokens#transfer-tokens-from-your-first-wallet-to-the-second-address
-
-// Random example code from Google https://githubmemory.com/repo/1Crazymoney/math-solana-js
-// web3.js docs https://solana-labs.github.io/solana-web3.js/modules.html#sendandconfirmtransaction
-
-// SEE lib/transfer.js for working code

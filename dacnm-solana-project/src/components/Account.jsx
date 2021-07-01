@@ -1,13 +1,13 @@
 import React from 'react';
 import { Alert, Button, Col, Space, Typography } from 'antd';
+import styled from 'styled-components';
 import { Keypair } from "@solana/web3.js";
 
-const { Text, Paragraph } = Typography;
+const { Text } = Typography;
 
 const Account = ({ keypair, setKeypair }) => {
   const generateKeypair = () => {
     const keypair = Keypair.generate();
-    console.log(keypair);
     setKeypair(keypair);
   }
 
@@ -31,7 +31,7 @@ const Account = ({ keypair, setKeypair }) => {
                   <Text>Open the JS console to inspect the Keypair.</Text>
                   <div>
                     This is the string representation of the public key
-                    <Text code>{publicKeyStr}</Text>.
+                    <KeyText code>{publicKeyStr}</KeyText>.
                   </div>
                   <Text>It's accessible (and copyable) at the top right of this page.</Text>
                 </div>
@@ -45,5 +45,9 @@ const Account = ({ keypair, setKeypair }) => {
     </Col>
   );
 }
+
+const KeyText = styled(Text)`
+  font-size: 100%;
+`;
 
 export default Account

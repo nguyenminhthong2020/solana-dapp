@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Alert, Button, Row, Col, Typography, Space } from 'antd';
+import { Button, Row, Col, Typography } from 'antd';
 import styled from "styled-components";
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
-import { ArrowUpRight } from 'react-feather';
 
 import { STEPS } from "../lib/steps-config";
 import Balance from "./Balance";
@@ -10,8 +9,6 @@ import Account from "./Account";
 import Fund from "./Fund";
 import Transfer from "./Transfer";
 import Connect from "./Connect";
-import Deploy from "./Deploy";
-import Call from "./Call";
 
 const { Text, Paragraph } = Typography;
 
@@ -21,22 +18,10 @@ const Step = ({ stepIndex, prev, next }) => {
   const step = STEPS[stepIndex];
 
   return (
-    <Right span={16} key={stepIndex}>
+    <Right key={stepIndex}>
       <Col>
         <StepHeader>
           <Title>{step.title}</Title>
-          <Alert
-            message={
-              <Space>
-                <Text strong>Start here!</Text>
-                <Space align="center" size="small">
-                  <Link><a href={step.url} target="_blank" rel="noreferrer">View step Instructions</a></Link>
-                  <ArrowUpRight color="#1890ff" size={18} style={{ marginTop: "6px" }} />
-                </Space>
-              </Space>
-            }
-            type="info"
-          />
         </StepHeader>
 
         <StepContent>
@@ -45,8 +30,6 @@ const Step = ({ stepIndex, prev, next }) => {
           {step.id === "fund" && <Fund />}
           {step.id === "balance" && <Balance />}
           {step.id === "transfer" && <Transfer keypair={keypair} />}
-          {step.id === "deploy" && <Deploy />}
-          {step.id === "call" && <Call />}
         </StepContent>
 
         <StepsNav stepIndex={stepIndex} next={next} prev={prev} />
@@ -64,13 +47,18 @@ const Nav = ({ keypair }) => {
   const publicKeyToDisplay = `${publicKey.slice(0,5)}...${publicKey.slice(-5)}`;
 
   return (
-    <div style={{ position: "fixed", top: 20, right: 20 }}>
+    <div style={{ position: 'fixed', top: 20, right: 20 }}>
       <Paragraph copyable={{ text: keypair.publicKey.toString() }}>
-        <Text code>{publicKeyToDisplay}</Text>
+        <KeyPairText code>{publicKeyToDisplay}</KeyPairText>
       </Paragraph>
     </div>
   )
 }
+
+const KeyPairText = styled(Text)`
+  color: white;
+  font-size: 100%;
+`;
 
 const StepsNav = ({ stepIndex, next, prev }) => {
   return (
@@ -101,22 +89,14 @@ const StepHeader = styled(Col)`
   margin-bottom: 40px;
 `;
 
-const StepFooter = styled(Row)`
-  margin-top: 20px;
+const StepFooter = styled.div`
+  margin: auto;
 `;
 
 const Title = styled.div`
   font-size: 30px;
   font-weight: 600;
   margin-bottom: 10px;
-`;
-
-const Link = styled.div`
-  font-weight: 400;
-
-  &:hover {
-    text-decoration: underline;
-  }
 `;
 
 const StepContent = styled.div`
